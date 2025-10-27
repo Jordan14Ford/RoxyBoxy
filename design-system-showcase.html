@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash App Currency Coach - Design System Showcase</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        /* Additional showcase-specific styles */
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--neutral-200);
+            min-height: 100vh;
+        }
+        
+        .showcase-section {
+            background: var(--neutral-100);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .showcase-title {
+            font-size: var(--text-3xl);
+            font-weight: var(--font-bold);
+            color: var(--cash-green-primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-semibold);
+            color: var(--neutral-900);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--cash-green-primary);
+            padding-bottom: 0.5rem;
+        }
+        
+        .component-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin-bottom: 2rem;
+        }
+        
+        .component-demo {
+            background: var(--neutral-100);
+            border: 1px solid var(--neutral-300);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .demo-label {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--neutral-600);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-wide);
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .color-swatch {
+            height: 80px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: var(--font-semibold);
+            font-size: var(--text-sm);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .typography-demo {
+            margin-bottom: 2rem;
+        }
+        
+        .typography-item {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-left: 3px solid var(--cash-green-primary);
+            padding-left: 1rem;
+        }
+        
+        .spacing-demo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .spacing-box {
+            background: var(--cash-green-primary);
+            border-radius: var(--radius-sm);
+        }
+        
+        .interactive-demo {
+            background: var(--neutral-100);
+            border: 2px dashed var(--neutral-400);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+        }
+        
+        .interactive-demo:hover {
+            border-color: var(--cash-green-primary);
+            background: var(--cash-green-subtle);
+        }
+        
+        .interactive-demo:active {
+            transform: scale(0.98);
+        }
+        
+        .mobile-preview {
+            max-width: 375px;
+            margin: 0 auto;
+            background: var(--neutral-100);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 8px solid var(--neutral-900);
+        }
+        
+        .mobile-header {
+            background: var(--cash-green-primary);
+            color: var(--neutral-100);
+            padding: 1rem;
+            text-align: center;
+            font-weight: var(--font-bold);
+        }
+        
+        .mobile-content {
+            padding: 1rem;
+        }
+        
+        .balance-demo {
+            background: linear-gradient(135deg, var(--cash-green-primary) 0%, var(--cash-green-dark) 100%);
+            color: var(--neutral-100);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .balance-demo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .balance-amount {
+            font-family: var(--font-mono);
+            font-size: var(--text-3xl);
+            font-weight: var(--font-bold);
+            margin: 0.5rem 0;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-action {
+            background: var(--neutral-100);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--neutral-300);
+            cursor: pointer;
+            transition: all 150ms ease-in-out;
+        }
+        
+        .quick-action:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .quick-action:active {
+            transform: scale(0.95);
+        }
+        
+        .action-icon {
+            font-size: var(--text-2xl);
+            margin-bottom: 0.5rem;
+        }
+        
+        .action-title {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--neutral-900);
+        }
+        
+        .conversion-demo {
+            background: var(--neutral-100);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--neutral-300);
+        }
+        
+        .conversion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .currency-pair {
+            font-weight: var(--font-semibold);
+            color: var(--neutral-900);
+        }
+        
+        .conversion-time {
+            font-size: var(--text-xs);
+            color: var(--neutral-600);
+        }
+        
+        .conversion-amounts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .amount-from {
+            font-family: var(--font-mono);
+            font-weight: var(--font-bold);
+            color: var(--error-red);
+        }
+        
+        .amount-to {
+            font-family: var(--font-mono);
+            font-weight: var(--font-bold);
+            color: var(--success-green);
+        }
+        
+        .conversion-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--text-xs);
+            color: var(--neutral-600);
+        }
+        
+        .ai-indicator {
+            background: var(--info-blue-light);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        .ai-text {
+            font-size: var(--text-xs);
+            color: var(--info-blue);
+            font-weight: var(--font-medium);
+        }
+        
+        .floating-demo {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: var(--cash-green-primary);
+            color: var(--neutral-100);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xl);
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            transition: all 150ms ease-in-out;
+            z-index: 1000;
+        }
+        
+        .floating-demo:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .floating-demo:active {
+            transform: scale(0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .showcase-container {
+                padding: 1rem;
+            }
+            
+            .showcase-section {
+                padding: 1rem;
+            }
+            
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .color-palette {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="showcase-container">
+        <h1 class="showcase-title">🎨 Cash App Currency Coach Design System</h1>
+        
+        <!-- Color Palette Section -->
+        <div class="showcase-section">
+            <h2 class="section-title">🌈 Color Palette</h2>
+            <div class="color-palette">
+                <div class="color-swatch" style="background: var(--cash-green-primary);">Primary Green</div>
+                <div class="color-swatch" style="background: var(--cash-green-dark);">Dark Green</div>
+                <div class="color-swatch" style="background: var(--cash-green-light);">Light Green</div>
+                <div class="color-swatch" style="background: var(--success-green);">Success</div>
+                <div class="color-swatch" style="background: var(--error-red);">Error</div>
+                <div class="color-swatch" style="background: var(--warning-orange);">Warning</div>
+                <div class="color-swatch" style="background: var(--info-blue);">Info</div>
+                <div class="color-swatch" style="background: var(--neutral-900); color: white;">Neutral 900</div>
+                <div class="color-swatch" style="background: var(--neutral-700); color: white;">Neutral 700</div>
+                <div class="color-swatch" style="background: var(--neutral-500); color: white;">Neutral 500</div>
+                <div class="color-swatch" style="background: var(--neutral-300); color: var(--neutral-900);">Neutral 300</div>
+                <div class="color-swatch" style="background: var(--neutral-100); color: var(--neutral-900); border: 1px solid var(--neutral-300);">Neutral 100</div>
+            </div>
+        </div>
+        
+        <!-- Typography Section -->
+        <div class="showcase-section">
+            <h2 class="section-title">📝 Typography</h2>
+            <div class="typography-demo">
+                <div class="typography-item">
+                    <div class="text-4xl font-bold">Page Title (36px)</div>
+                    <div class="demo-label">text-4xl font-bold</div>
+                </div>
+                <div class="typography-item">
+                    <div class="text-3xl font-bold">Section Header (30px)</div>
+                    <div class="demo-label">text-3xl font-bold</div>
+                </div>
+                <div class="typography-item">
+                    <div class="text-2xl font-semibold">Card Title (24px)</div>
+                    <div class="demo-label">text-2xl font-semibold</div>
+                </div>
+                <div class="typography-item">
+                    <div class="text-xl font-semibold">Subsection (20px)</div>
+                    <div class="demo-label">text-xl font-semibold</div>
+                </div>
+                <div class="typography-item">
+                    <div class="text-lg font-medium">Large Body (18px)</div>
+                    <div class="demo-label">text-lg font-medium</div>
+                </div>
+                <div class="typography-item">
+                    <div class="text-base font-normal">Default Body (16px)</div>
+                    <div class="demo-label">text-base font-normal</div>
+                </div>
+                <div class="typography-item">
+                    <div class="text-sm font-normal">Small Text (14px)</div>
+                    <div class="demo-label">text-sm font-normal</div>
+                </div>
+                <div class="typography-item">
+                    <div class="text-xs font-medium">Caption (12px)</div>
+                    <div class="demo-label">text-xs font-medium</div>
+                </div>
+                <div class="typography-item">
+                    <div class="currency-amount currency-amount-large">$1,234.56</div>
+                    <div class="demo-label">Currency Amount (Monospace)</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Spacing Section -->
+        <div class="showcase-section">
+            <h2 class="section-title">📏 Spacing System</h2>
+            <div class="spacing-demo">
+                <span>Space 1 (4px):</span>
+                <div class="spacing-box" style="width: var(--space-1); height: var(--space-1);"></div>
+            </div>
+            <div class="spacing-demo">
+                <span>Space 2 (8px):</span>
+                <div class="spacing-box" style="width: var(--space-2); height: var(--space-2);"></div>
+            </div>
+            <div class="spacing-demo">
+                <span>Space 4 (16px):</span>
+                <div class="spacing-box" style="width: var(--space-4); height: var(--space-4);"></div>
+            </div>
+            <div class="spacing-demo">
+                <span>Space 6 (24px):</span>
+                <div class="spacing-box" style="width: var(--space-6); height: var(--space-6);"></div>
+            </div>
+            <div class="spacing-demo">
+                <span>Space 8 (32px):</span>
+                <div class="spacing-box" style="width: var(--space-8); height: var(--space-8);"></div>
+            </div>
+        </div>
+        
+        <!-- Button Components -->
+        <div class="showcase-section">
+            <h2 class="section-title">🔘 Button Components</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <div class="demo-label">Primary Button</div>
+                    <button class="btn btn-primary">Convert Currency</button>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Secondary Button</div>
+                    <button class="btn btn-secondary">Get AI Coaching</button>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Ghost Button</div>
+                    <button class="btn btn-ghost">View Details</button>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Icon Button</div>
+                    <button class="btn btn-primary btn-icon">↻</button>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Small Button</div>
+                    <button class="btn btn-primary btn-sm">Small</button>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Large Button</div>
+                    <button class="btn btn-primary btn-lg">Large Button</button>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Full Width</div>
+                    <button class="btn btn-primary btn-full">Full Width</button>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Loading State</div>
+                    <button class="btn btn-primary btn-loading">Loading...</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card Components -->
+        <div class="showcase-section">
+            <h2 class="section-title">🃏 Card Components</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <div class="demo-label">Standard Card</div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-lg font-semibold">Card Title</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-sm">This is a standard card with header and body content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Elevated Card</div>
+                    <div class="card card-elevated">
+                        <div class="card-body">
+                            <h3 class="text-lg font-semibold mb-3">Elevated Card</h3>
+                            <p class="text-sm">This card has enhanced shadow for emphasis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Interactive Card</div>
+                    <div class="card card-interactive">
+                        <div class="card-body">
+                            <h3 class="text-lg font-semibold mb-3">Interactive Card</h3>
+                            <p class="text-sm">Click me! I have hover and active states.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Success Card</div>
+                    <div class="card card-success">
+                        <div class="card-body">
+                            <h3 class="text-lg font-semibold mb-3 text-success">Success!</h3>
+                            <p class="text-sm">Your conversion was completed successfully.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Input Components -->
+        <div class="showcase-section">
+            <h2 class="section-title">📝 Input Components</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <div class="demo-label">Text Input</div>
+                    <input type="text" class="input" placeholder="Enter amount...">
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Currency Input</div>
+                    <div class="input-group-currency">
+                        <span class="currency-symbol">$</span>
+                        <input type="text" class="input input-currency" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Search Input</div>
+                    <input type="text" class="input input-search" placeholder="Search currencies...">
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Select Dropdown</div>
+                    <select class="input select">
+                        <option>USD - US Dollar</option>
+                        <option>EUR - Euro</option>
+                        <option>GBP - British Pound</option>
+                    </select>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Checkbox</div>
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" class="checkbox">
+                        <span class="text-sm">Enable notifications</span>
+                    </label>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Switch</div>
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" class="switch">
+                        <span class="text-sm">Dark mode</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile App Preview -->
+        <div class="showcase-section">
+            <h2 class="section-title">📱 Mobile App Preview</h2>
+            <div class="mobile-preview">
+                <div class="mobile-header">
+                    Currency Coach
+                </div>
+                <div class="mobile-content">
+                    <!-- Balance Card -->
+                    <div class="balance-demo">
+                        <div class="text-sm font-semibold">Cash Balance</div>
+                        <div class="balance-amount">$1,000.00</div>
+                        <div class="text-xs opacity-90">💡 AI Insight: Your spending is 15% below average this month!</div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <div class="quick-action">
+                            <div class="action-icon">💱</div>
+                            <div class="action-title">Convert</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="action-icon">🤖</div>
+                            <div class="action-title">AI Coach</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Conversion -->
+                    <div class="conversion-demo">
+                        <div class="conversion-header">
+                            <div class="currency-pair">USD → EUR</div>
+                            <div class="conversion-time">2:30 PM</div>
+                        </div>
+                        <div class="conversion-amounts">
+                            <div class="amount-from">$100.00</div>
+                            <div style="color: var(--neutral-600);">→</div>
+                            <div class="amount-to">€85.50</div>
+                        </div>
+                        <div class="conversion-details">
+                            <div>Rate: 0.8550</div>
+                            <div>Fees: $2.50</div>
+                        </div>
+                        <div class="ai-indicator">
+                            <div class="ai-text">🤖 Tap for AI analysis</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Demo -->
+        <div class="showcase-section">
+            <h2 class="section-title">🎮 Interactive Demo</h2>
+            <div class="interactive-demo" onclick="this.style.transform = 'scale(0.95)'; setTimeout(() => this.style.transform = 'scale(1)', 150)">
+                <h3 class="text-lg font-semibold mb-3">Click Me!</h3>
+                <p class="text-sm">I demonstrate touch feedback and animations. Try clicking me!</p>
+            </div>
+        </div>
+        
+        <!-- Rate Indicators -->
+        <div class="showcase-section">
+            <h2 class="section-title">📈 Rate Indicators</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <div class="demo-label">Rate Up</div>
+                    <div class="rate-indicator up">
+                        <span class="rate-icon">📈</span>
+                        <span>+0.21%</span>
+                    </div>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Rate Down</div>
+                    <div class="rate-indicator down">
+                        <span class="rate-icon">📉</span>
+                        <span>-0.12%</span>
+                    </div>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Rate Stable</div>
+                    <div class="rate-indicator stable">
+                        <span class="rate-icon">➡️</span>
+                        <span>0.00%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading States -->
+        <div class="showcase-section">
+            <h2 class="section-title">⏳ Loading States</h2>
+            <div class="component-grid">
+                <div class="component-demo">
+                    <div class="demo-label">Spinner</div>
+                    <div class="loading-spinner"></div>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Loading Dots</div>
+                    <div class="loading-dots">Loading</div>
+                </div>
+                <div class="component-demo">
+                    <div class="demo-label">Card Loading</div>
+                    <div class="card card-loading">
+                        <div class="card-body">
+                            <div style="height: 60px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Action Button -->
+    <div class="floating-demo" onclick="alert('Floating Action Button clicked!')">
+        +
+    </div>
+    
+    <script>
+        // Add some interactive functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for interactive elements
+            const interactiveCards = document.querySelectorAll('.card-interactive');
+            interactiveCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+            
+            // Add hover effects for buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('btn-loading')) {
+                        this.style.transform = 'translateY(-1px)';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // Add focus management
+            const focusableElements = document.querySelectorAll('button, input, select');
+            focusableElements.forEach(element => {
+                element.addEventListener('focus', function() {
+                    this.style.outline = '2px solid var(--cash-green-primary)';
+                    this.style.outlineOffset = '2px';
+                });
+                
+                element.addEventListener('blur', function() {
+                    this.style.outline = '';
+                    this.style.outlineOffset = '';
+                });
+            });
+            
+            // Simulate loading states
+            const loadingButtons = document.querySelectorAll('.btn-loading');
+            loadingButtons.forEach(button => {
+                setTimeout(() => {
+                    button.classList.remove('btn-loading');
+                    button.textContent = 'Complete!';
+                    button.style.background = 'var(--success-green)';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
