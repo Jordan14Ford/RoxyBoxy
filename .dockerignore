@@ -1,0 +1,122 @@
+# -------------------------------
+# MINIMAL (Early-stage default)
+# Keep images lean and avoid obvious leaks, but don't block iteration.
+# -------------------------------
+
+# VCS & metadata
+.git
+.gitignore
+
+# OS/IDE noise
+.DS_Store
+.vscode
+.idea
+
+# Dependencies & build outputs (we will re-install inside image)
+node_modules
+dist
+build
+out
+.next
+.next/cache
+.turbo
+.swc
+coverage
+.nyc_output
+.storybook-out
+.out
+.parcel-cache
+.cache
+tsconfig.tsbuildinfo
+
+# Logs & temp
+logs
+*.log
+tmp
+temp
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Package manager artifacts
+.npm
+.pnpm-store
+.yarn
+.yarn-integrity
+*.tgz
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Example: keep env *templates* tracked, but not real secrets
+# (You probably want to COPY example.env manually as needed)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Common credential locations (prevent accidental COPY)
+.aws
+.gcloud
+netrc
+.npmrc
+.yarnrc
+.yarnrc.yml
+.pypirc
+.sentryclirc
+
+# Databases & caches
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Certificates / keys (rare early, but cheap to ignore)
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+*.keystore
+*.crt
+*.der
+.secret
+secrets.*
+*.secret*
+
+# Framework/vendor metadata (if present)
+.vercel
+.netlify
+.serverless
+.firebase
+.firebaserc
+firebase.json
+amplify
+supabase/.temp
+supabase/.branches
+dist-ssr
+
+# -------------------------------
+# HARDENED (Enable later by uncommenting)
+# Tighten build context & protect multi-stage builds.
+# -------------------------------
+
+# .dockerignore itself can stay; keep comments above for clarity
+# **Uncomment below when ready for stricter images**
+
+# tests
+# __tests__/
+# test/
+# specs/
+# playwright-report/
+# coverage-final.json
+
+# client source maps for server bundles (optional)
+# *.map
+
+# monorepo examples (adjust to your structure)
+# packages/*/node_modules
+# apps/*/node_modules
+# examples/
+# docs/
