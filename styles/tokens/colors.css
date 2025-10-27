@@ -1,0 +1,65 @@
+/* 
+ * DESIGN TOKENS - Colors
+ * Cash App Currency Coach Color System
+ */
+
+:root {
+  /* Cash App Brand Colors */
+  --cash-green-primary: #00D4AA;
+  --cash-green-dark: #00B894;
+  --cash-green-light: #55E0C4;
+  --cash-green-subtle: #E8F5E8;
+
+  /* Neutral Colors */
+  --neutral-900: #1a1a1a;
+  --neutral-800: #2d2d2d;
+  --neutral-700: #4a4a4a;
+  --neutral-600: #6c757d;
+  --neutral-500: #8e8e93;
+  --neutral-400: #c7c7cc;
+  --neutral-300: #e9ecef;
+  --neutral-200: #f8f9fa;
+  --neutral-100: #ffffff;
+
+  /* Semantic Colors */
+  --success-green: #28a745;
+  --error-red: #dc3545;
+  --warning-orange: #fd7e14;
+  --info-blue: #17a2b8;
+  --info-blue-light: #e3f2fd;
+
+  /* Status Colors */
+  --rate-up: #28a745;
+  --rate-down: #dc3545;
+  --rate-stable: #6c757d;
+
+  /* Color Opacity Variants */
+  --cash-green-primary-10: rgba(0, 212, 170, 0.1);
+  --cash-green-primary-20: rgba(0, 212, 170, 0.2);
+  --cash-green-primary-30: rgba(0, 212, 170, 0.3);
+  
+  --success-green-10: rgba(40, 167, 69, 0.1);
+  --error-red-10: rgba(220, 53, 69, 0.1);
+  --info-blue-10: rgba(23, 162, 184, 0.1);
+
+  /* Shadow Colors */
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --shadow-heavy: rgba(0, 0, 0, 0.25);
+  --shadow-cash-green: rgba(0, 212, 170, 0.3);
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --neutral-900: #ffffff;
+    --neutral-800: #f8f9fa;
+    --neutral-700: #e9ecef;
+    --neutral-600: #c7c7cc;
+    --neutral-500: #8e8e93;
+    --neutral-400: #6c757d;
+    --neutral-300: #4a4a4a;
+    --neutral-200: #2d2d2d;
+    --neutral-100: #1a1a1a;
+  }
+}

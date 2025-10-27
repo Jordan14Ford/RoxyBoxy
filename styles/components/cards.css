@@ -1,0 +1,277 @@
+/* 
+ * COMPONENT LIBRARY - Cards
+ * Cash App Currency Coach Card Components
+ */
+
+/* Base Card Styles */
+.card {
+  background: var(--neutral-100);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--neutral-300);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all 150ms ease-in-out;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.card:focus-within {
+  box-shadow: 0 0 0 3px var(--cash-green-primary-20);
+}
+
+/* Card Variants */
+.card-elevated {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-elevated:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+.card-flat {
+  box-shadow: none;
+  border: 1px solid var(--neutral-300);
+}
+
+.card-flat:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Balance Card (Special Cash App Styling) */
+.card-balance {
+  background: linear-gradient(135deg, var(--cash-green-primary) 0%, var(--cash-green-dark) 100%);
+  color: var(--neutral-100);
+  border: none;
+  box-shadow: var(--shadow-cash);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-balance::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.card-balance:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow-cash-green);
+}
+
+/* Card Content */
+.card-header {
+  padding: var(--space-5) var(--space-5) var(--space-3);
+  border-bottom: 1px solid var(--neutral-300);
+}
+
+.card-balance .card-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-body {
+  padding: var(--space-5);
+}
+
+.card-footer {
+  padding: var(--space-3) var(--space-5) var(--space-5);
+  border-top: 1px solid var(--neutral-300);
+  background: var(--neutral-200);
+}
+
+.card-balance .card-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Card Sizes */
+.card-sm {
+  border-radius: var(--radius-lg);
+}
+
+.card-sm .card-header,
+.card-sm .card-body,
+.card-sm .card-footer {
+  padding: var(--space-3);
+}
+
+.card-lg {
+  border-radius: var(--radius-2xl);
+}
+
+.card-lg .card-header,
+.card-lg .card-body,
+.card-lg .card-footer {
+  padding: var(--space-6);
+}
+
+/* Interactive Cards */
+.card-interactive {
+  cursor: pointer;
+  user-select: none;
+}
+
+.card-interactive:active {
+  transform: scale(0.98);
+}
+
+.card-interactive:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--cash-green-primary-20);
+}
+
+/* Card with Image */
+.card-image {
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: var(--neutral-100);
+  padding: var(--space-5);
+}
+
+/* Status Cards */
+.card-success {
+  border-left: 4px solid var(--success-green);
+}
+
+.card-error {
+  border-left: 4px solid var(--error-red);
+}
+
+.card-warning {
+  border-left: 4px solid var(--warning-orange);
+}
+
+.card-info {
+  border-left: 4px solid var(--info-blue);
+}
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Responsive Card Grid */
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-grid-2,
+  .card-grid-3,
+  .card-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .card-grid-3,
+  .card-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Card Loading State */
+.card-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: card-shimmer 1.5s infinite;
+}
+
+@keyframes card-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Card Animations */
+.card-fade-in {
+  animation: card-fade-in 0.3s ease-out;
+}
+
+@keyframes card-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-slide-in {
+  animation: card-slide-in 0.4s ease-out;
+}
+
+@keyframes card-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Card Accessibility */
+.card[role="button"] {
+  cursor: pointer;
+}
+
+.card[role="button"]:focus {
+  outline: 2px solid var(--cash-green-primary);
+  outline-offset: 2px;
+}
+
+.card[aria-expanded="true"] {
+  border-color: var(--cash-green-primary);
+}
+
+.card[aria-expanded="false"] {
+  border-color: var(--neutral-300);
+}
