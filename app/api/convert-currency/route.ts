@@ -92,15 +92,35 @@ export async function POST(request: Request) {
       completion.choices?.[0]?.message?.content?.trim() ??
       'Keep an eye on market shifts and consider converting during active trading hours for smoother rates.';
 
+    const result = {
+      id: crypto.randomUUID(),
+      fromCurrency: body.fromCurrency,
+      toCurrency: body.toCurrency,
+      amount: body.amount,
+      convertedAmount: roundedConvertedAmount,
+      rate,
+      fees: roundedFee,
+      netAmount: roundedNetAmount,
+      aiTips,
+      timestamp: new Date().toISOString(),
+    };
+
+    // Log the conversion for analytics
+    console.log('Currency conversion completed:', {
+      id: result.id,
+      from: result.fromCurrency,
+      to: result.toCurrency,
+      amount: result.amount,
+      rate: result.rate,
+      fees: result.fees,
+      convertedAmount: result.convertedAmount,
+      timestamp: result.timestamp,
+    });
+
     return NextResponse.json({
       success: true,
-      data: {
-        rate,
-        fee: roundedFee,
-        netAmount: roundedNetAmount,
-        convertedAmount: roundedConvertedAmount,
-        aiTips,
-      },
+      data: result,
+      message: `Successfully converted ${body.amount} ${body.fromCurrency} to ${roundedNetAmount} ${body.toCurrency}`
     });
   } catch (error) {
     if (error instanceof Error) {

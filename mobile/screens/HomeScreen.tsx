@@ -42,12 +42,36 @@ const { width } = Dimensions.get('window');
 export default function HomeScreen({ navigation }: Props) {
   const [recentConversions, setRecentConversions] = useState<ConversionResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [userBalance, setUserBalance] = useState(1000); // Mock balance
+  const [userBalance, setUserBalance] = useState(1000);
+  const [marketTrends, setMarketTrends] = useState<any[]>([]);
 
   useEffect(() => {
-    loadRecentConversions();
-    loadUserBalance();
+    loadUserData();
   }, []);
+
+  const loadUserData = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Load all user data in parallel
+      const [conversions, balance, trends] = await Promise.all([
+        CurrencyService.getStoredConversions(),
+        CurrencyService.getUserBalance(),
+        CurrencyService.getMarketTrends(),
+      ]);
+      
+      setRecentConversions(conversions);
+      setUserBalance(balance);
+      setMarketTrends(trends);
+      
+      console.log('User data loaded successfully');
+    } catch (error) {
+      console.error('Failed to load user data:', error);
+      Alert.alert('Error', 'Failed to load your data. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   /**
    * AI/MCP CONNECTION: Load recent conversions with AI insights
@@ -105,14 +129,36 @@ export default function HomeScreen({ navigation }: Props) {
 
   /**
    * INTERACTIVE ACTION: Quick currency conversion
-   * Navigates to conversion screen with pre-filled popular currencies
+   * Performs actual conversion with data persistence
    */
-  const handleQuickConvert = () => {
-    navigation.navigate('Conversion', {
-      fromCurrency: 'USD',
-      toCurrency: 'EUR',
-      amount: 100,
-    });
+  const handleQuickConvert = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Perform a quick conversion
+      const result = await CurrencyService.processConversion({
+        fromCurrency: 'USD',
+        toCurrency: 'EUR',
+        amount: 100,
+      });
+      
+      // Update local state
+      setRecentConversions(prev => [result, ...prev.slice(0, 9)]);
+      setUserBalance(prev => prev - 100);
+      
+      // Navigate to conversion screen with result
+      navigation.navigate('Conversion', {
+        conversionResult: result,
+        showResult: true,
+      });
+      
+      Alert.alert('Success!', `Converted $100 USD to €${result.netAmount.toFixed(2)} EUR`);
+    } catch (error) {
+      console.error('Quick conversion failed:', error);
+      Alert.alert('Error', 'Failed to complete conversion. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   /**
@@ -123,40 +169,35 @@ export default function HomeScreen({ navigation }: Props) {
     try {
       setIsLoading(true);
       
-      // AI/MCP CONNECTION: Get personalized coaching
-      // const advice = await AICoachService.getPersonalizedAdvice({
-      //   recentConversions,
-      //   userBalance,
-      //   riskProfile: 'moderate'
-      // });
+      // Get personalized AI coaching based on user data
+      const advice = await AICoachService.getPersonalizedAdvice({
+        recentConversions,
+        userBalance,
+        riskProfile: 'moderate'
+      });
       
-      // Mock AI advice for now
-      const mockAdvice = {
-        title: 'Market Opportunity',
-        message: 'EUR rates are favorable today. Consider converting USD to EUR.',
-        tips: [
-          'Best time to convert: 2-4 PM EST',
-          'Consider converting in smaller batches',
-          'Monitor Fed announcements this week'
-        ],
-        urgency: 'medium' as const,
-        category: 'timing' as const,
-      };
-      
-      navigation.navigate('Coach', { conversionData: undefined });
+      navigation.navigate('Coach', { 
+        conversionData: undefined,
+        advice,
+        userData: {
+          balance: userBalance,
+          recentConversions,
+        }
+      });
     } catch (error) {
-      Alert.alert('Error', 'Failed to get AI coaching');
+      console.error('Failed to get AI coaching:', error);
+      Alert.alert('Error', 'Failed to get AI coaching. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
   /**
-   * INTERACTIVE ACTION: View detailed conversion
-   * Shows conversion details with AI analysis
+   * INTERACTIVE ACTION: Refresh all data
+   * Reloads user data from storage
    */
-  const handleViewConversion = (conversion: ConversionResult) => {
-    navigation.navigate('Coach', { conversionData: conversion });
+  const handleRefresh = async () => {
+    await loadUserData();
   };
 
   return (
@@ -164,7 +205,7 @@ export default function HomeScreen({ navigation }: Props) {
       {/* Balance Card */}
       <BalanceCard 
         balance={userBalance} 
-        onRefresh={loadUserBalance}
+        onRefresh={handleRefresh}
         isLoading={isLoading}
       />
 
